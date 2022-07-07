@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Dashboard</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Dashboard</a></li>
+          <li><button onclick="getKarten()">Karten</button></li>
+          <li><a href="">Abrechnung</a></li>
+        </ul>
+      </nav>
+
+      <h2>Select a Number</h2>
+      <input type="number" placeholder="Type in a number!" id="select_num">
+      <button id="getdata" onclick="sendSearchNumber()">Get Data from backend!</button>
+      <button id="savedata" onclick="saveData()">Save Data to backend!</button>
+      <button id="createMahnung" onclick="createMahnung()">Create Mahnung from Template!</button>
+
+
+      <h2>Data</h2>
+      <div class="coltest">
+        <span>Gartennummer: </span>   <input type="text" id="number">
+        <span>Vorname: </span>        <input type="text" id="firstname">
+        <span>Nachname: </span>       <input type="text" id="lastname">
+        <span>Geburtsdatum: </span>   <input type="text" id="dob">
+        <span>Alter: </span>          <input type="number" id="age" disabled>
+        <span>Adresse: </span>        <input type="text" id="address">
+        <span>Postleitzahl: </span>   <input type="text" id="zip">
+        <span>Stadt: </span>          <input type="text" id="city">
+        <span>Telefon: </span>        <input type="text" id="phone">
+
+        <span>Aufbaustunden: </span>            <input type="text" id="aufbaustunden">
+        <span>Beitritt am: </span>              <input type="text" id="beitritt_am">
+        <span>nichtgeleistete Stunden: </span>  <input type="text" id="nglStunden">
+        <span>Tätigkeit: </span>                <input type="text" id="taetigkeit">
+        <span>Bemerkung: </span>                <input type="text" id="bemerkung">
+        <span>Karte schreiben?: </span>         <input type="text" id="bdaycard">
+        <span>Größe in qm: </span>              <input type="text" id="qm">
+        <span>Gartenweg: </span>                <input type="text" id="weg">
+
+        <span>Toilette: </span>     <input type="text" id="toilette">
+        <span>E-Mail: </span>       <input type="text" id="email">
+        <span>Wasser Alt: </span>   <input type="text" id="wasser_alt">
+        <span>Wasser Neu: </span>   <input type="text" id="wasser_neu">
+        <span>Strom Alt: </span>    <input type="text" id="strom_alt">
+        <span>Strom Neu: </span>    <input type="text" id="strom_neu">
+        
+        <span>Einbau Stromzähler: </span><input type="text" id="einbau_stromzaehler">
+        <span>Auslauf Stromzähler: </span><input type="text" id="auslaufjahr_stromzaehler">
+        <span>Verplombung: </span><input type="text" id="verplombung_jahr">
+        <span>Verblombung erneuern: </span><input type="text" id="verplombung_jahr_erneuern">
+        <span>Gutschrift: </span><input type="text" id="gutschrift">
+            
+        <span>Summe Strom: </span><input type="text" id="summe_strom" disabled>
+        <span>Summe Wasser: </span><input type="text" id="summe_wasser" disabled>
+        <span>Summe Aufbaustunden: </span><input type="text" id="summe_aufbaustunden" disabled>
+        <span>Summe Pacht: </span><input type="text" id="summe_pacht" disabled>
+        <span>Summe Strom & Wasser: </span><input type="text" id="summe_stromwasser" disabled>
+        <span>Haarfarbe: </span>    <input type="text" id="haarfarbe">
+
+      </div>
+    </div>
+    <script>
+function sendSearchNumber() {
+    let searchField = document.getElementById("select_num");
+    document.getElementById("ausgabe").innerHTML = "Lädt, bitte warten..."; 
+    google.script.run.withSuccessHandler(data => {
+            //Fill out the form
+            var dataObj = JSON.parse(data);
+            var inputs = document.getElementsByTagName('input');
+            for (var i = 0; i < inputs.length; i++) {
+              
+              console.log(dataObj[inputs[i].getAttribute('id')]);
+              inputs[i].value = dataObj[inputs[i].getAttribute('id')];
+            }
+        var inputs = document.getElementsByTagName('input');
+        for (var i = 0; i < inputs.length; i++) {
+            if (inputs[i].value == 'undefined') {
+                inputs[i].value = '';
+            }
+        }
+        document.getElementById("ausgabe").innerHTML = "Daten geladen!";
+        return dataObj;
+    }).withFailureHandler(er => {
+    alert(er)
+}).searchData(searchField.value)
+}
+function getKarten() {
+  google.script.run.withSuccessHandler( data => {
+
+  }).withFailureHandler( er => {
+    alert(er);
+  }).getNewPage()
+}
+function saveData() {
+    document.getElementById("ausgabe").innerHTML = "Wird gespeichert..."; 
+
+    let inputs = document.getElementsByTagName('input');
+    let saveObj = {};
+    for (var i = 0; i < inputs.length; i++) {
+        //console.log(inputs[i].getAttribute('id'));
+        saveObj[inputs[i].getAttribute('id')] = inputs[i].value;
+    }
+    console.log(saveObj);
+    google.script.run.withSuccessHandler(data => {
+
+    }).withFailureHandler(er => {
+      alert(er)
+    }).saveDataFromHTML(saveObj)
+    document.getElementById("ausgabe").innerHTML = "Erfolgreich abgeschlossen!"; 
+}
+
+function dateFormater(date, separator) {
+  var day = date.getDate();
+  // add +1 to month because getMonth() returns month from 0 to 11
+  var month = date.getMonth() + 1;
+  var year = date.getFullYear();
+
+  // show date and month in two digits
+  // if month is less than 10, add a 0 before it
+  if (day < 10) {
+    day = '0' + day;
+  }
+  if (month < 10) {
+    month = '0' + month;
+  }
+
+  // now we have day, month and year
+  // use the separator to join them
+  return day + separator + month + separator + year;
+}
+
+// function clearFields() {
+//   var inputs = document.getElementsByTagName('input');
+//   for (var i = 0; i < inputs.length; i++) {
+//     inputs[i].value = "";
+//   }
+// }
+
+    </script>
+          <h1 id="ausgabe">Test!</h1>
+  </body>
+</html>

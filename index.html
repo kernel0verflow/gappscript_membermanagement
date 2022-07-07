@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <style> 
+      .form-control {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- MAIN CONTAINER AND WRAPPER OF THE CONTENT -->
+    <div class="container">
+
+      <!-- NAVBAR -->
+      <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      
+      <!-- HEADING -->
+      <div class="row">
+        <h1 class="bg-info col-12">Dashboard</h1>
+      </div>
+      
+      <!-- FORM TO GET USER DATA AND CHANGE IT -->
+      <div class="row g-3">
+
+        <div class="col">
+          <button class="btn btn-primary" id="getdata" onclick="sendSearchNumber()">Abfragen</button>
+        </div>
+        <div class="col">
+          <button class="btn btn-primary" id="savedata" onclick="saveData()">Daten Speichern</button>
+        </div>
+
+        <label for="select_num" class="form-label">Gartennummer</label>
+        <input type="number" class="form-control" id="select_num" placeholder="Suchfeld: Gartennummer eintippen">
+
+        <!-- Column with personal data -->
+        <div class="col">
+          <label for="number" class="form-label">Gartennummer</label>
+          <input type="number" class="form-control" id="number" placeholder="Gartennummer">
+
+          <label for="lastname" class="form-label">Nachname</label>
+          <input type="text" class="form-control" id="lastname" placeholder="Nachname">
+
+          <label for="firstname" class="form-label">Vorname</label>
+          <input type="text" class="form-control" id="firstname" placeholder="firstnamel">
+
+          <label for="dob" class="form-label">Geburtsdatum</label>
+          <input type="text" class="form-control" id="dob" placeholder="Geburtsdatum">
+
+          <label for="age" class="form-label">Alter</label>
+          <input type="text" class="form-control" id="age" placeholder="Alter">
+
+          <label for="address" class="form-label">Adresse</label>
+          <input type="text" class="form-control" id="address" placeholder="Adresse">
+
+          <label for="zip" class="form-label">Postleitzahl</label>
+          <input type="text" class="form-control" id="zip" placeholder="Postleitzahl">
+
+          <label for="city" class="form-label">Wohnort</label>
+          <input type="text" class="form-control" id="city" placeholder="Wohnort / Stadt">
+
+          <label for="phone" class="form-label">Telefonnummer</label>
+          <input type="text" class="form-control" id="phone" placeholder="Telefonnummer">
+
+          <label for="email" class="form-label">E-Mail</label>
+          <input type="text" class="form-control" id="email" placeholder="E-Mail Adresse">
+        </div>
+        
+        <!-- Column for specific Garden Data -->
+
+        <div class="col">
+          <label for="aufbaustunden" class="form-label">Aufbaustunden</label>
+          <input type="text" class="form-control" id="aufbaustunden" placeholder="Aufbaustunden Ja/Nein?">
+
+          <label for="nglStunden" class="form-label">nichtgeleistete Stunden</label>
+          <input type="text" class="form-control" id="nglStunden" placeholder="nichtgeleistete Stunden">
+
+          <label for="beitritt_am" class="form-label">Beigetreten am</label>
+          <input type="text" class="form-control" id="beitritt_am" placeholder="Beigetreten am">
+          
+          <label for="taetigkeit" class="form-label">Taetigkeit</label>
+          <input type="text" class="form-control" id="taetigkeit" placeholder="Taetigkeit">
+
+          <label for="bemerkung" class="form-label">Bemerkung</label>
+          <input type="text" class="form-control" id="bemerkung" placeholder="bemerkung">
+
+          <label for="qm" class="form-label">Garten in qm</label>
+          <input type="text" class="form-control" id="qm" placeholder="Garten in qm">
+
+          <label for="weg" class="form-label">Gartenweg</label>
+          <input type="text" class="form-control" id="weg" placeholder="Gartenweg">
+
+          <label for="toilette" class="form-label">Toilette</label>
+          <input type="text" class="form-control" id="toilette" placeholder="Toilette Ja/Nein Preis">
+        </div>
+
+      <!-- Financial Data -->
+      <div class="col">
+
+        <label for="verplombung_jahr" class="form-label">Verplombung</label>
+        <input type="text" class="form-control" id="verplombung_jahr" placeholder="Verplombung">
+
+        <label for="verplombung_erneuern_jahr" class="form-label">Verplombung erneuern Jahr</label>
+        <input type="text" class="form-control" id="verplombung_erneuern_jahr" placeholder="Verplombung erneuern Jahr">
+
+        <label for="wasser_alt" class="form-label">Wasser Alt</label>
+        <input type="text" class="form-control" id="wasser_alt" placeholder="Wasser Alt / Vorjahr">
+
+        <label for="wasser_neu" class="form-label">Wasser Neu</label>
+        <input type="text" class="form-control" id="wasser_neu" placeholder="Wasser Neu / aktuelles Jahr">
+
+        <label for="summe_wasser" class="form-label">Summe Wasser</label>
+        <input type="text" class="form-control" id="summe_wasser" placeholder="Summe Wasser in Euro">
+        
+        <label for="einbau_stromzaehler" class="form-label">Einbaujahr Stromzaehler</label>
+        <input type="text" class="form-control" id="einbau_stromzaehler" placeholder="Einbaujahr Stromzaehler">
+
+        <label for="auslaufjahr_stromzaehler" class="form-label">Auslaufjahr Stromzaehler</label>
+        <input type="text" class="form-control" id="auslaufjahr_stromzaehler" placeholder="Auslaufjahr Stromzaehler">
+
+        <label for="strom_alt" class="form-label">Strom Alt in kwh</label>
+        <input type="text" class="form-control" id="strom_alt" placeholder="Strom Alt / Vorjahr">
+
+        <label for="strom_neu" class="form-label">Strom Neu in kwh</label>
+        <input type="text" class="form-control" id="strom_neu" placeholder="Strom Neu / aktuelles Jahr">
+
+        <label for="summe_strom" class="form-label">Summe Strom</label>
+        <input type="text" class="form-control" id="summe_strom" placeholder="Summe Strom in Euro">
+        
+        <label for="gutschrift" class="form-label">Gutschrift</label>
+        <input type="text" class="form-control" id="gutschrift" placeholder="Gutschrift">
+      </div>
+
+      <h1>Summe Gesamt</h1>
+      
+      <label for="summe_pacht" class="form-label">Summe Pacht</label>
+      <input type="text" class="form-control" id="summe_pacht" placeholder="Summe Pacht">
+
+      <label for="summe_stromwasser" class="form-label">Summe Strom & Wasser</label>
+      <input type="text" class="form-control" id="summe_stromwasser" placeholder="Summe Strom & Wasser">
+
+    </div>
+    <script>
+      function sendSearchNumber() {
+        let searchField = document.getElementById("select_num");
+        google.script.run.withSuccessHandler(data => {
+            //Fill out the form
+            clearFields();
+            var dataObj = JSON.parse(data);
+            var inputs = document.getElementsByTagName('input');
+            for (var i = 0; i < inputs.length; i++) {
+
+                console.log(dataObj[inputs[i].getAttribute('id')]);
+                inputs[i].value = dataObj[inputs[i].getAttribute('id')];
+            }
+            var inputs = document.getElementsByTagName('input');
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].value == 'undefined') {
+                    inputs[i].value = '';
+                }
+            }
+            return dataObj;
+        }).withFailureHandler(er => {
+            alert(er)
+        }).searchData(searchField.value)
+      }
+
+      function saveData() {
+
+        let inputs = document.getElementsByTagName('input');
+        let saveObj = {};
+        for (var i = 0; i < inputs.length; i++) {
+            //console.log(inputs[i].getAttribute('id'));
+            saveObj[inputs[i].getAttribute('id')] = inputs[i].value;
+        }
+        console.log(saveObj);
+        google.script.run.withSuccessHandler(data => {
+
+        }).withFailureHandler(er => {
+            alert(er)
+        }).saveDataFromHTML(saveObj)
+      }
+    function dateFormater(date, separator) {
+      var day = date.getDate();
+      // add +1 to month because getMonth() returns month from 0 to 11
+      var month = date.getMonth() + 1;
+      var year = date.getFullYear();
+
+      // show date and month in two digits
+      // if month is less than 10, add a 0 before it
+      if (day < 10) {
+          day = '0' + day;
+      }
+      if (month < 10) {
+          month = '0' + month;
+      }
+
+      // now we have day, month and year
+      // use the separator to join them
+      return day + separator + month + separator + year;
+    }
+
+    function clearFields() {
+      let inputs = document.getElementsByTagName('input');
+      for (let index = 1; index <= inputs.length; index++) {
+        if(inputs[index] == undefined) {
+          break
+        } else {
+        console.log(inputs[index]);
+        inputs[index].value = "";
+        }
+      }
+      
+    }
+    
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>
